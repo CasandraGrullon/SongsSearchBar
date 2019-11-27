@@ -58,6 +58,14 @@ class SongListVC: UIViewController {
 }
 extension SongListVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if songs.count == 0 {
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 21))
+            label.textAlignment = .center
+            view.addSubview(label)
+            label.text = "No Results"
+            tableView.backgroundView = label
+        }
+        
         return songs.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,6 +87,7 @@ extension SongListVC: UISearchBarDelegate{
             return
         }
         searchQuery = searchText
+        
     }
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         switch selectedScope {
